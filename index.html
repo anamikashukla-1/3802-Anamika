@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anamika Shukla - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Background with Vertical Bands and Overlapping Elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #ff69b4 0%, #ffa500 25%, #0080ff 50%, #800080 75%, #ff69b4 100%);
+            z-index: -2;
+        }
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 105, 180, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 128, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(128, 0, 128, 0.2) 0%, transparent 50%);
+            z-index: -1;
+        }
+        .accent-squares {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ffa500;
+            border-radius: 2px;
+            z-index: -1;
+        }
+        .accent-squares:nth-child(2) { background: #0080ff; top: 20%; left: 10%; }
+        .accent-squares:nth-child(3) { background: #800080; top: 40%; right: 15%; }
+        .accent-squares:nth-child(4) { background: #ff69b4; top: 60%; left: 20%; }
+        .accent-squares:nth-child(5) { background: #ffa500; top: 80%; right: 10%; }
+
+        /* Header/Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background: rgba(255, 105, 180, 0.2);
+        }
+        .cta-button {
+            background: linear-gradient(45deg, #ff69b4, #ffa500);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.3s;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        #hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        #hero h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .btn {
+            background: linear-gradient(45deg, #0080ff, #800080);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.3s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* About Me */
+        #about {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+        #about p {
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        .skill-badge {
+            background: linear-gradient(45deg, #ffa500, #ff69b4);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .certificates {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .certificate {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .certificate img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects */
+        #projects {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        .project-card h3 {
+            margin-bottom: 1rem;
+        }
+        .project-card p {
+            margin-bottom: 1rem;
+        }
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .tech {
+            background: #0080ff;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        /* Contact */
+        #contact {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-family: inherit;
+        }
+        .contact-links {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .contact-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            #hero h1 {
+                font-size: 2rem;
+            }
+            #hero h2 {
+                font-size: 1.2rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay">
+        <div class="accent-squares"></div>
+        <div class="accent-squares"></div>
+        <div class="accent-squares"></div>
+        <div class="accent-squares"></div>
+        <div class="accent-squares"></div>
+    </div>
+    <header id="nav">
+        <div class="logo">Anamika Shukla</div>
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <a href="#contact" class="cta-button">Contact Me</a>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <h1>Anamika Shukla</h1>
+            <h2>Cyber Security Professional</h2>
+            <div class="profile-img"><img src="profile.jpeg" style="width: 300px; height: 300px; border-radius: 80%; object-fit: cover;"></div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>A motivated IT professional with 3+ years of experience, seeking to grow through continuous learning and make a meaningful contribution to an organization. Eager to take on new challenges, with strong work ethics, adaptability, and the ability to work effectively and quickly.</p>
+            <p>With expertise in cloud security, compliance, and penetration testing, I have supported internal application audits, managed Azure Active Directory, and implemented security protocols to reduce unauthorized access. Proficient in tools like Wireshark, Burp Suite, and Python for automation and analysis.</p>
+            <h3>Core Skills</h3>
+            <div class="skills">
+                <span class="skill-badge">Cloud Security</span>
+                <span class="skill-badge">OWASP</span>
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">Azure IAM</span>
+                <span class="skill-badge">Penetration Testing</span>
+                <span class="skill-badge">Data Protection</span>
+            </div>
+          <h2>Experience</h2>
+            <div class="timeline">
+             <div class="job">
+                <h3>Security Operations/Compliance Analyst</h3>
+                <h4>Compliance & Audit Responsibilities</h4>
+                    <p>Handled internal audits of applications to support SOX compliance, assessing the effectiveness of internal controls and ensuring adherence to regulatory requirements.</p>
+                    <p>Developing the controls for the application internal audit to adhere compliance for operational and support team especially IT General Controls (ITGCs) and IT Application Controls (ITACs).</p>
+                    <p>Collaborating with business users to facilitate with reports findings and continuous improvisation over the procedures.</p>
+                    <p>Developed and maintained comprehensive documentation of audit findings, processes, and recommendations. Prepared audit reports for senior management and the audit committee, highlighting key risks and areas for improvement.</p>
+                    <p>Experience in internal audits of applications to support SOX compliance, assessing the effectiveness of internal controls and ensuring adherence to regulatory requirements.</p>
+                    <p>Collaborating with business users to facilitate with reports findings and continuous improvisation over the procedures.</p>
+                    <p>Developed and maintained comprehensive documentation of audit findings, processes, and recommendations.</p>
+                    <p>Prepared audit reports for senior management and the audit committee, highlighting key risks and areas for improvement.</p>
+                    <p>Possess a solid understanding of key IT security standards including ISO27000, and GDPR.</p>
+                    <p>Hands-on experience with ServiceNow in the context of ITIL-based service management.</p>
+                <h4>Cloud Security & IAM</h4>
+                <ul>
+                    <p>Managing Azure Active Directory activities like application onboarding using SAML,OAUTH, OIDC protocols and identity and access management (IAM) solutions using Azure Active Directory to control and secure user access to cloud resources by using the security postures and processes.</p>
+                    <p>Implemented the MFA and SSO for enhancing security of cloud resources and users.</p>
+                    <p>Proficient in using Microsoft Purview for data classification, applying sensitivity labels, and configuring auto-labeling policies to strengthen data security and compliance.</p>
+                    <p>Proficient in the renewal and management of encryption certificates, ensuring secure transactions and protecting sensitive data from unauthorized access.</p>
+                    <p>Efficiently able to implement and manage security measures such as Data Loss Prevention (DLP) policies and compliance solutions to ensure regulatory compliance with standards like GDPR and ISO over cloud azure cloud environments.</p>
+                </ul>
+                <h4>Log Analysis & Vulnerability Management</h4>
+                <ul>
+                    <p>Skillful in log analytics for results finding and understanding the improvisation areas.</p>
+                    <p>Skillful in log analytics for results finding and understanding the improvisation areas.</p>
+                    <p>Experience in vulnerability management and remediation process.</p>
+                    <p>Experience in vulnerability management and remediation process.</p>
+                    <p>In-depth understanding of network security architecture, including firewalls, intrusion detection/prevention systems (IDS/IPS), and network segmentation.</p>
+                    <p>Skillful with Microsoft SIEM & SOAR tool Sentinel, for proactive threat detection and response within cloud environments.</p>
+                    <p>Good understanding of Azure workbooks, playbooks and connectors.</p>
+                </ul>
+             </div>
+            </div>
+            <h3>Certificates</h3>
+            <div class="certificates">
+                <div class="certificate">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/021/496/617/small/windows-symbol-brand-logo-design-microsoft-software-illustration-free-vector.jpg" alt="Microsoft Logo">
+                    <p>AZ-500: Microsoft Certified - Azure Security Engineer Associate</p>
+                </div>
+                <div class="certificate">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/021/496/617/small/windows-symbol-brand-logo-design-microsoft-software-illustration-free-vector.jpg" alt="Microsoft Logo">
+                    <p>SC-200: Microsoft Certified - Security Operations Analyst Associate</p>
+                </div>
+                <div class="certificate">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/021/496/617/small/windows-symbol-brand-logo-design-microsoft-software-illustration-free-vector.jpg" alt="Microsoft Logo">
+                    <p>SC-400: Microsoft Certified: Information Protection and Compliance Administrator Associate</p>
+                </div>
+                <div class="certificate">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/021/496/617/small/windows-symbol-brand-logo-design-microsoft-software-illustration-free-vector.jpg" alt="Microsoft Logo">
+                    <p>SC-900: Microsoft Security, Compliance and Identity Fundamentals</p>
+                </div>
+                <div class="certificate">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/021/496/617/small/windows-symbol-brand-logo-design-microsoft-software-illustration-free-vector.jpg" alt="Microsoft Logo">
+                    <p>SC-300: Microsoft Certified: Identity and Access Administrator Associate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Audit Report</h3>
+                    <p>Developed and implemented application validation audit controls, mapping system processes to critical compliance requirements under ITGC, SOX, and GDPR to establish a robust and defensible control environment.</p>
+                    <div class="tech-list">
+                        <span class="tech">Audit Controls</span>
+                        <span class="tech">ITGC</span>
+                        <span class="tech">GDPR</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Network Packet Analyzer</h3>
+                    <p>Created a packet sniffing IDS (Intrusion Detection System) to analyze the traffic and block the malicious packets inbound in network for an android phone.</p>
+                    <div class="tech-list">
+                        <span class="tech">Wireshark</span>
+                        <span class="tech">Python</span>
+                        <span class="tech">Networking</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Penetration Testing Report Generator</h3>
+                    <p>Built reports using Burp Suite analysis and used the report data to streamline penetration testing processes and generate detailed security reports.</p>
+                    <div class="tech-list">
+                        <span class="tech">Burp Suite</span>
+                        <span class="tech">Python</span>
+                        <span class="tech">OWASP</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Details</h2>
+                <span class="skill-badge">anamikashukla250@gmail.com</span>
+                <span class="skill-badge">9267943802</span>
+            <div class="contact-links">
+                <a href="mailto:anaika@example.com">Thanks</a>
+                <a href="www.linkedin.com/in/anamika-shukla-a23166235" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-icons">
+            <a href="#" target="_blank">GitHub</a>
+            <a href="www.linkedin.com/in/anamika-shukla-a23166235" target="_blank">LinkedIn</a>
+            <a href="#" target="_blank">Twitter</a>
+        </div>
+        <p>&copy; 2023 Anamika Shukla. All rights reserved.</p>
+    </footer>
+</body>
+</html>
